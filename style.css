@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    display: block;
+}
+
+
+
+nav {
+    background-color: cornflowerblue;
+    gap: 0.5rem;
+}
+a {
+    text-decoration: none;
+}
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    margin: 0;
+    display: inline-flex;
+    flex-direction:row;
+    gap: 0;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
