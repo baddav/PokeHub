@@ -3,12 +3,20 @@ body {
     display: block;
 }
 
-
-
 nav {
     background-color: cornflowerblue;
-    gap: 0.5rem;
+    display: flex;
 }
+
+main {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Abstand zwischen Input und Button */
+    padding: 1rem;
+}
+
+
+
 a {
     text-decoration: none;
 }
@@ -28,4 +36,17 @@ a {
 
 .nav-btn:hover {
     background: rgba(255, 255, 255, 0.3);
+}
+
+.pokemonBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
 }
