@@ -8,13 +8,6 @@ nav {
     display: flex;
 }
 
-main {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem; /* Abstand zwischen Input und Button */
-    padding: 1rem;
-}
-
 
 
 a {
