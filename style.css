@@ -1,0 +1,52 @@
+body {
+    margin: 0;
+    display: block;
+}
+
+nav {
+    background-color: cornflowerblue;
+    display: flex;
+}
+
+main {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* Abstand zwischen Input und Button */
+    padding: 1rem;
+}
+
+
+
+a {
+    text-decoration: none;
+}
+
+.nav-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-weight: 500;
+    margin: 0;
+    display: inline-flex;
+    flex-direction:row;
+    gap: 0;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.pokemonBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem;
+    width: 200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+}
