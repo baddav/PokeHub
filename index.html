@@ -18,14 +18,42 @@
             </nav>
         </div>
     </header>
-    <header>
-        <nav>
-
-        </nav>
-    </header>
     <main>
+        <div class="filters">
+            <label for="typeFilter">Type:</label>
+            <select id="typeFilter">
+                <option value="">All Types</option>
+                <option value="grass">Grass</option>
+                <option value="fire">Fire</option>
+                <option value="water">Water</option>
+                <option value="bug">Bug</option>
+                <option value="flying">Flying</option>
+                <option value="normal">Normal</option>
+            </select>
 
+            <label for="stageFilter">Stage:</label>
+            <select id="stageFilter">
+                <option value="">All Stages</option>
+                <option value="base">Base</option>
+                <option value="1st">1st Evolution</option>
+                <option value="2nd">2nd Evolution</option>
+            </select>
+
+            <label for="sortFilter">Sort By:</label>
+            <select id="sortFilter">
+                <option value="">Default</option>
+                <option value="name-asc">Name (A–Z)</option>
+                <option value="name-desc">Name (Z–A)</option>
+                <option value="id-asc">Pokédex # (Ascending)</option>
+                <option value="id-desc">Pokédex # (Descending)</option>
+            </select>
+        </div>
+        <div class="container">
+            <div class="pokemon-gallery"></div>
+            <button class="load-more">Load More</button>
+        </div>
     </main>
+    <script src="gallery.js"></script>
     <footer>
         <p>Impressum</p>
     </footer>
