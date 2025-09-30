@@ -1,10 +1,5 @@
-const filters = document.querySelector('.filters');
-const typeFilter = document.getElementById('typeFilter');
-const stageFilter = document.getElementById('stageFilter');
-const sortFilter = document.getElementById('sortFilter');
 const gallery = document.querySelector('.pokemon-gallery');
 const loadMoreButton = document.querySelector('.load-more');
-let lastScrollY = window.scrollY;
 let nextUrl = 'https://pokeapi.co/api/v2/pokemon?limit=20';
 
 // Funktion, um Pokémon-Daten von der API abzurufen
@@ -25,7 +20,6 @@ async function fetchPokemonData(url) {
     }
 }
 
-// Funktion, um Pokémon-Karten zu rendern
 function renderPokemonCards(data) {
     data.forEach((pokemon) => {
         const card = document.createElement('div');
@@ -33,14 +27,100 @@ function renderPokemonCards(data) {
         card.dataset.id = pokemon.id;
         card.dataset.name = pokemon.name;
         card.dataset.type = pokemon.types[0].type.name;
-        card.dataset.stage = 'base'; // Die API liefert keine Evolutionsstufe, daher Standardwert
 
         card.innerHTML = `
             <img src="${pokemon.sprites.other['official-artwork'].front_default}" alt="${pokemon.name}">
             <h3>${pokemon.name}</h3>
         `;
+
+        // Create the stats section
+        const statsSection = document.createElement('div');
+        statsSection.classList.add('pokemon-stats');
+        statsSection.innerHTML = `
+            <div class="stat-group">
+                <h4>Physical Info</h4>
+                <div class="stat-item">
+                    <span>Height</span>
+                    <span>${(pokemon.height / 10).toFixed(1)} m</span>
+                </div>
+                <div class="stat-item">
+                    <span>Weight</span>
+                    <span>${(pokemon.weight / 10).toFixed(1)} kg</span>
+                </div>
+                <div class="stat-item">
+                    <span>Base Experience</span>
+                    <span>${pokemon.base_experience || 'Unknown'}</span>
+                </div>
+            </div>
+            <div class="stat-group">
+                <h4>Base Stats</h4>
+                ${pokemon.stats.map(stat => `
+                    <div class="stat-item">
+                        <span>${formatStatName(stat.stat.name)}</span>
+                        <span>${stat.base_stat}</span>
+                    </div>
+                    <div class="stat-bar">
+                        <div class="stat-fill" style="width: ${Math.min(stat.base_stat / 200 * 100, 100)}%"></div>
+                    </div>
+                `).join('')}
+            </div>
+            <div class="stat-group">
+                <h4>Abilities</h4>
+                <div class="abilities-list">
+                    ${pokemon.abilities.map(ability =>
+            `<span class="ability">${ability.ability.name}${ability.is_hidden ? ' (Hidden)' : ''}</span>`
+        ).join('')}
+                </div>
+            </div>
+        `;
+
+        // Hide stats section by default
+        statsSection.style.display = 'none';
+        card.appendChild(statsSection);
+
+        // Event listener for fullscreen mode
+        card.addEventListener('click', () => {
+            const isFullscreen = card.classList.contains('fullscreen');
+
+            // Remove fullscreen from other cards
+            document.querySelectorAll('.pokemon-card.fullscreen').forEach((fullscreenCard) => {
+                fullscreenCard.classList.remove('fullscreen');
+                fullscreenCard.querySelector('.pokemon-stats').style.display = 'none';
+            });
+            document.querySelectorAll('.overlay.active').forEach((overlay) => {
+                overlay.classList.remove('active');
+            });
+
+            if (!isFullscreen) {
+                // Add fullscreen class and show stats
+                card.classList.add('fullscreen');
+                statsSection.style.display = 'block';
+
+                // Create and activate overlay
+                let overlay = document.querySelector('.overlay');
+                if (!overlay) {
+                    overlay = document.createElement('div');
+                    overlay.classList.add('overlay');
+                    document.body.appendChild(overlay);
+                }
+                overlay.classList.add('active');
+
+                // Close fullscreen on overlay click
+                overlay.addEventListener('click', () => {
+                    card.classList.remove('fullscreen');
+                    statsSection.style.display = 'none';
+                    overlay.classList.remove('active');
+                });
+            }
+        });
+
         gallery.appendChild(card);
     });
+}
+
+// Helper function to format stat names
+function formatStatName(name) {
+    return name.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
 }
 
 // Funktion, um weitere Pokémon zu laden
@@ -52,16 +132,6 @@ function loadMorePokemon() {
         loadMoreButton.textContent = 'No more Pokémon';
     }
 }
-
-// Scroll-Verhalten für die Filterleiste
-window.addEventListener('scroll', () => {
-    if (window.scrollY > lastScrollY) {
-        filters.classList.add('hidden'); // Verstecke Filter beim Herunterscrollen
-    } else {
-        filters.classList.remove('hidden'); // Zeige Filter beim Hochscrollen
-    }
-    lastScrollY = window.scrollY;
-});
 
 // Event-Listener für den "Load More"-Button
 loadMoreButton.addEventListener('click', loadMorePokemon);
