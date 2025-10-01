@@ -24,10 +24,12 @@ function getPokemon(e) {
                 <p>${data.weight}</p>
             </div>
             `;
+            box.style.display = "flex";
         })
         .catch((err) => {
             // Logge einen Fehler in die Konsole, wenn das Pokémon nicht gefunden wird
             console.log("Pokemon not found", err);
+            box.innerHTML = "";
             box.style.display = "none";
         });
 
@@ -35,3 +37,75 @@ function getPokemon(e) {
     e.preventDefault();
 }
 
+
+/* ----------------------------
+
+   Tipp-Rotation
+
+----------------------------- */
+
+// 15 Tipps als Array
+
+const tips = [
+
+    "Lasse deine Pokémon gegeneinander kämpfen und finde heraus, wer der Stärkste ist.",
+
+    "Verbessere deine Pokémon, indem du sie trainierst und ihre Fähigkeiten stärkst.",
+
+    "Teile niemals dein Passwort mit Dritten – Sicherheit geht vor!",
+
+    "Fange verschiedene Pokémon, um dein Team vielseitiger zu machen.",
+
+    "Nutze Typvorteile, um Kämpfe einfacher zu gewinnen.",
+
+    "Heile deine Pokémon regelmäßig im Pokémon-Center.",
+
+    "Vergiss nicht, Pokébälle nachzukaufen – man weiß nie, wann ein seltenes Pokémon auftaucht!",
+
+    "Baue ein Team mit einer guten Balance aus Angriff und Verteidigung.",
+
+    "Experimentiere mit verschiedenen Attacken-Kombinationen.",
+
+    "Einige Pokémon entwickeln sich nur durch bestimmte Items – probiere es aus!",
+
+    "Tausche Pokémon mit Freunden, um deinen Pokédex schneller zu füllen.",
+
+    "Achte auf die Wetterbedingungen – manche Pokémon erscheinen nur unter bestimmten Bedingungen.",
+
+    "Legendäre Pokémon sind besonders stark, aber schwer zu fangen.",
+
+    "Trainiere nicht nur ein Pokémon – ein ausgewogenes Team kann besser sein.",
+
+    "Setze Status-Effekte wie Schlaf oder Paralyse strategisch im Kampf ein."
+
+];
+
+// Alle Tipp-Elemente auswählen
+
+const tipElements = document.querySelectorAll(".tip-card p");
+
+let currentTipIndex = 0;
+
+function changeTips() {
+
+    tipElements.forEach((el, i) => {
+
+        // Jeder Tipp bekommt einen eigenen Offset
+
+        const tipIndex = (currentTipIndex + i) % tips.length;
+
+        el.textContent = tips[tipIndex];
+
+    });
+
+    currentTipIndex = (currentTipIndex + tipElements.length) % tips.length;
+
+}
+
+// Starte sofort mit den ersten Tipps
+
+changeTips();
+
+// Alle 12 Sekunden rotieren
+
+setInterval(changeTips, 12000);

@@ -97,24 +97,24 @@ body {
 }
 
 .nav-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.8);
 }
 
 .nav-btn.active {
-    background: white;
-    color: var(--primary-color);
+
+    color: black;
 }
 a {
     text-decoration: none;
 }
 
 .pokemonBox {
-    display: block;
+    display: none;
     min-height: 250px;
     flex-direction: column;   /* Bild + Infos untereinander */
     align-items: center;      /* horizontal zentrieren */
     justify-content: center;  /* vertikal zentrieren (falls größer wird) */
-    margin-top: 15rem;        /* Abstand nach der Suchleiste */
+    margin-top: 10rem;        /* Abstand nach der Suchleiste */
     border: 1px solid #ccc;
     border-radius: 12px;
     padding: 2rem;
@@ -155,7 +155,7 @@ a {
     align-items: center;
     gap: 0.5rem;
     position: absolute;
-    top: 25%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -172,14 +172,14 @@ a {
     font-size: 1.2rem;
     border: none;
     border-radius: 8px;
-    background-color: cornflowerblue;
+    background-color: royalblue;
     color: white;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
 .search-box button:hover {
-    background-color: royalblue;
+    background-color: cornflowerblue;
 }
 
 .tips {
@@ -190,7 +190,7 @@ a {
 
     gap: 2rem;
 
-    margin: 5rem auto;
+    margin: 10rem auto;
 
     max-width: 1000px;
 
