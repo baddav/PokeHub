@@ -101,7 +101,7 @@ body {
 }
 
 .nav-btn.active {
-
+    background: rgba(255, 255, 255, 0.8);
     color: black;
 }
 a {
@@ -181,6 +181,7 @@ a {
 .search-box button:hover {
     background-color: cornflowerblue;
 }
+.tips {
     display: flex;
     justify-content: center;
     gap: 2rem;
