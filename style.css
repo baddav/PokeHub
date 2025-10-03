@@ -134,7 +134,7 @@ a {
     border-radius: var(--border-radius);
     padding: 1rem;
     box-shadow: var(--shadow-sm);
-    transition: transform var(--transition), box-shadow var(--transition);
+    transition: transform 0.2s ease, width 0.2s ease, height 0.2s ease;
 }
 
 .pokemon-card:hover {
@@ -178,10 +178,6 @@ a {
     background-color: var(--border-color);
     color: var(--text-secondary);
     cursor: not-allowed;
-}
-
-.pokemon-card {
-    transition: transform 0.2s ease, width 0.2s ease, height 0.2s ease;
 }
 
 .pokemon-card.fullscreen {
